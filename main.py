@@ -51,6 +51,16 @@ def add_user():
     elif "." not in set_email:
         email_error = "Email must contain '.' symbol."
         set_email = ""
+    elif len(set_email) <3:
+        email_error = "Email must be greater than three characters."
+        set_email = ""
+    elif len(set_email) >20:
+        email_error = "Email must be less than twenty characters."
+        set_email = ""
+    for char in set_email:
+        if char == " ":
+            email_error = "Email cannot contain spaces."
+            set_email = ""
     
     if not user_error:
         if not password_error:

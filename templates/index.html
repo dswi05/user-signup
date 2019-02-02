@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="/" method="post">
+
+    <label>
+        User name:
+        <input type="text" name="new-user"/>
+    </label>
+    <br>
+    <br>
+    <label>
+        Password :
+        <input type="password" name="set-pswd"/>
+    </label>
+    <br>
+    <br>
+    <label>
+        Verify Password:
+        <input type="password" name="verify-pswd"/>
+    </label>
+    <br>
+    <br>
+    <label>
+        Email (optional):
+        <input type="text" name="set-email"/>
+    </label>
+    <br>
+    <br>
+    <input type="submit" value="Add User"/>
+
+</form>
+
+{% endblock %}

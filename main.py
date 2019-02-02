@@ -45,11 +45,11 @@ def add_user():
 
     set_email = request.form['new-email']
     email_error = ""
-    if "@" not in set_email:
-        email_error = "Email must contain '@' symbol."
+    if "." not in set_email:
+        email_error = "Email must contain '@' and '.' symbols."
         set_email = ""
-    elif "." not in set_email:
-        email_error = "Email must contain '.' symbol."
+    elif "@" not in set_email:
+        email_error = "Email must contain '@' and '.' symbols."
         set_email = ""
     elif len(set_email) <3:
         email_error = "Email must be greater than three characters."
@@ -62,17 +62,22 @@ def add_user():
             email_error = "Email cannot contain spaces."
             set_email = ""
     
-    if not user_error:
-        if not password_error:
-            if not verify_error:
-                if not email_error:
-                    return render_template('welcome.html', new_user=new_user)
-                else: return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error, password_error=password_error, verify_error=verify_error, email_error=email_error)
-            else:
-                return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error, password_error=password_error, verify_error=verify_error)
-        else:
-            return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error, password_error=password_error)
+    if not user_error and not password_error and not verify_error and not email_error:
+        return render_template("welcome.html", new_user=new_user)
     else:
-        return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error)
+        return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error, password_error=password_error, verify_error=verify_error, email_error=email_error)
+
+    # if not user_error:
+    #     if not password_error:
+    #         if not verify_error:
+    #             if not email_error:
+    #                 return render_template('welcome.html', new_user=new_user)
+    #             else: return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error, password_error=password_error, verify_error=verify_error, email_error=email_error)
+    #         else:
+    #             return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error, password_error=password_error, verify_error=verify_error)
+    #     else:
+    #         return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error, password_error=password_error)
+    # else:
+    #     return render_template('index.html', new_user=new_user, set_email=set_email, user_error=user_error)
 
 app.run()

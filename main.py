@@ -45,22 +45,23 @@ def add_user():
 
     set_email = request.form['new-email']
     email_error = ""
-    if "." not in set_email:
-        email_error = "Email must contain '@' and '.' symbols."
-        set_email = ""
-    elif "@" not in set_email:
-        email_error = "Email must contain '@' and '.' symbols."
-        set_email = ""
-    elif len(set_email) <3:
-        email_error = "Email must be greater than three characters."
-        set_email = ""
-    elif len(set_email) >20:
-        email_error = "Email must be less than twenty characters."
-        set_email = ""
-    for char in set_email:
-        if char == " ":
-            email_error = "Email cannot contain spaces."
+    if len(set_email) != 0:
+        if "." not in set_email:
+            email_error = "Email must contain '@' and '.' symbols."
             set_email = ""
+        elif "@" not in set_email:
+            email_error = "Email must contain '@' and '.' symbols."
+            set_email = ""
+        elif len(set_email) <3:
+            email_error = "Email must be greater than three characters."
+            set_email = ""
+        elif len(set_email) >20:
+            email_error = "Email must be less than twenty characters."
+            set_email = ""
+        for char in set_email:
+            if char == " ":
+                email_error = "Email cannot contain spaces."
+                set_email = ""
     
     if not user_error and not password_error and not verify_error and not email_error:
         return render_template("welcome.html", new_user=new_user)
